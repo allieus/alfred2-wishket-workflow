@@ -1,7 +1,7 @@
 alfred2-wishket-workflow
 ========================
 
- * http://www.packal.org/workflow/wishket-project-search
+ * Download : http://www.packal.org/workflow/wishket-project-search
 
 
 ScreenShot

@@ -1,5 +1,6 @@
 # coding: utf-8
 import sys
+from optparse import OptionParser
 import urllib
 import urllib2
 import unicodedata
@@ -20,24 +21,22 @@ def escape(s):
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#39;')
 
 
-def safe_print(s):
-    if isinstance(s, unicode):
-        print(s.encode('utf-8'))
-    else:
-        print(s)
-
-
 class Wishket(object):
-    def __init__(self, q=None):
+    def __init__(self, category=None, q=None):
+        self.category = category
         self.q = q
-        self.items = []
         self.load()
 
     def load(self):
+        self.items = []
         for page in range(1,2):
             url = "http://www.wishket.com/project/?page={}".format(page)
+            if self.category:
+                url += '&category=' + self.category
             if self.q:
                 url += '&q=' + urllib.quote(self.q.encode('utf8'))
+            else:
+                url += '&q='
             html = get(url)
 
             soup = BeautifulSoup(html)
@@ -74,17 +73,25 @@ class Wishket(object):
 
 
 if __name__ == '__main__':
-    try:
-        q = sys.argv[1].decode('utf8')
-        q = unicodedata.normalize('NFC', q)
-    except IndexError:
+    parser = OptionParser()
+    parser.add_option('-d', action='store_const', const='development', dest='category')
+    parser.add_option('-g', action='store_const', const='design', dest='category')
+    (options, args) = parser.parse_args()
+
+    category = options.category
+
+    if args:
+        try:
+            q = args[0].decode('utf8')
+            q = unicodedata.normalize('NFC', q)
+        except IndexError:
+            q = None
+    else:
         q = None
 
-    wishket = Wishket(q)
-
-    safe_print(u'<?xml version="1.0" encoding="utf-8"?>')
-    safe_print(u'<items>')
-    for row in wishket.xml():
-        safe_print(row)
-    safe_print(u'</items>')
+    print('<?xml version="1.0" encoding="utf-8"?>')
+    print('<items>')
+    for row in Wishket(category, q).xml():
+        print(row.encode('utf8'))
+    print('</items>')
 

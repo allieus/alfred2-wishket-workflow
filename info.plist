@@ -6,6 +6,28 @@
 	<string>so.muk.wishket</string>
 	<key>connections</key>
 	<dict>
+		<key>772D8D53-CF3A-4529-9210-A5A3E2A2562B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>499C4B36-0E5A-4899-84EC-BBC9D0C1407A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>86AC6836-B7F9-4B81-B84F-B19121073741</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>499C4B36-0E5A-4899-84EC-BBC9D0C1407A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>CF55E040-5AD8-4B34-939C-A9617BA0914B</key>
 		<array>
 			<dict>
@@ -55,11 +77,11 @@
 				<key>keyword</key>
 				<string>wishket</string>
 				<key>runningsubtext</key>
-				<string>Loading ...</string>
+				<string>로딩 중 ...</string>
 				<key>script</key>
 				<string>/usr/bin/python ./run.py "{query}"</string>
 				<key>title</key>
-				<string>Wishket Search</string>
+				<string>위시켓, 최근 프로젝트 검색</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -72,6 +94,60 @@
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>36</integer>
+				<key>keyword</key>
+				<string>wishket dev</string>
+				<key>runningsubtext</key>
+				<string>로딩 중 ...</string>
+				<key>script</key>
+				<string>/usr/bin/python ./run.py "{query}" -d</string>
+				<key>title</key>
+				<string>위시켓, 최근 개발자 프로젝트 검색</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>86AC6836-B7F9-4B81-B84F-B19121073741</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>36</integer>
+				<key>keyword</key>
+				<string>wishket design</string>
+				<key>runningsubtext</key>
+				<string>로딩 중 ...</string>
+				<key>script</key>
+				<string>/usr/bin/python ./run.py "{query}" -g</string>
+				<key>title</key>
+				<string>위시켓, 최근 디자이너 프로젝트 검색</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>772D8D53-CF3A-4529-9210-A5A3E2A2562B</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -81,6 +157,16 @@
 		<dict>
 			<key>ypos</key>
 			<real>110</real>
+		</dict>
+		<key>772D8D53-CF3A-4529-9210-A5A3E2A2562B</key>
+		<dict>
+			<key>ypos</key>
+			<real>400</real>
+		</dict>
+		<key>86AC6836-B7F9-4B81-B84F-B19121073741</key>
+		<dict>
+			<key>ypos</key>
+			<real>280</real>
 		</dict>
 		<key>CF55E040-5AD8-4B34-939C-A9617BA0914B</key>
 		<dict>

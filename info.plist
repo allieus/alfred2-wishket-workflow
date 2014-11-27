@@ -47,7 +47,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Wishket Search</string>
+	<string>위시켓 프로젝트 검색</string>
 	<key>objects</key>
 	<array>
 		<dict>

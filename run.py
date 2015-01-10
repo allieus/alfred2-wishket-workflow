@@ -22,38 +22,51 @@ def escape(s):
 
 
 class Wishket(object):
+    SORT = {
+        'PRICE_DESC': 1,
+        'PRICE_ASC': 2,
+        'CREATED_AT_DESC': 3,
+        'CREATED_AT_ASC': 4,
+    }
     def __init__(self, category=None, q=None):
-        self.category = category
-        self.q = q
+        if category == 'development':
+            dev_code, design_code = ('2222222222', '11111111111')
+        elif category == 'design':
+            dev_code, design_code = ('1111111111', '22222222222')
+        else:
+            dev_code, design_code = ('2222222222', '22222222222')
+
+        if q:
+            q = urllib.quote(q.encode('utf8'))
+        else:
+            q = 'None'
+
+        page = 1
+        self.request_url = 'http://www.wishket.com/project/pl/{}/{}/{}/{}/{}/111111111111111111/'.format(
+            page, q, self.SORT['CREATED_AT_DESC'], dev_code, design_code)
+
         self.load()
 
     def load(self):
         self.items = []
-        for page in range(1,2):
-            url = "http://www.wishket.com/project/?page={}".format(page)
-            if self.category:
-                url += '&category=' + self.category
-            if self.q:
-                url += '&q=' + urllib.quote(self.q.encode('utf8'))
-            else:
-                url += '&q='
-            html = get(url)
 
-            soup = BeautifulSoup(html)
+        html = get(self.request_url)
 
-            for section in soup.findAll('section', {'class':'project-unit'}):
-                title = section.select('.project-title')[0].text
-                url = 'http://www.wishket.com' + section.select('a.grid-block')[0]['href']
-                deadline = section.select('.project-unit-heading .label')[0].text
-                info = ', '.join(info.text for info in section.select('.project-unit-basic-info span'))
-                desc = section.select('.project-unit-desc')[0].text
-                self.items.append({
-                    'title': title,
-                    'url': url,
-                    'deadline': deadline,
-                    'info': info,
-                    'desc': desc,
-                })
+        soup = BeautifulSoup(html)
+
+        for section in soup.findAll('section', {'class':'project-unit'}):
+            title = section.select('.project-title')[0].text
+            url = 'http://www.wishket.com' + section.select('a.grid-block')[0]['href']
+            deadline = section.select('.project-unit-heading .label')[0].text
+            info = ', '.join(info.text for info in section.select('.project-unit-basic-info span'))
+            desc = section.select('.project-unit-desc')[0].text
+            self.items.append({
+                'title': title,
+                'url': url,
+                'deadline': deadline,
+                'info': info,
+                'desc': desc,
+            })
 
 
     def xml(self):
